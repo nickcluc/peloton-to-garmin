@@ -112,7 +112,7 @@ for w in workouts:
         tcx_builder.workoutSamplesToTCX(workout, workoutSummary, workoutSamples, output_directory)
     except Exception as e:
         logger.error("Failed to write TCX file for workout {} - Exception: {}".format(workoutId, e))
-    
+
 
 logger.info("Done!")
 logger.info("Your Garmin TCX files can be found in the Output directory: " + output_directory)

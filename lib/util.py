@@ -6,6 +6,7 @@ from .constants import A_OK_HTTP_CODES, A_ERROR_HTTP_CODES
 from . import config_helper as config
 import logging
 import urllib
+import pprint
 
 ##############################
 # Logging Setup
@@ -21,6 +22,8 @@ def parse_response(response):
     logger.debug("parse_response - input: {}".format(response.text))
     parsed_response = json.loads(response.text)
     logger.debug("parse_response - parsed: {}".format(parsed_response))
+    # with open('data.json', 'w') as outfile:
+    #     json.dump(pprint.pprint(parsed_response), outfile)
     return parsed_response
 
 def handle_error(response):
@@ -43,11 +46,11 @@ def getResponse(session, url, payload, cookieDict):
         response = session.get(url, json=payload, cookies=cookieDict)
         parsed_response = parse_response(response)
         handle_error(response)
-        
+
         return parsed_response
     except Exception as e:
         logger.error("Exception: {}".format(e))
-    
+
 
 def logError(response):
     request = response.request
